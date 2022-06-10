@@ -77,7 +77,7 @@ JOIN PortfolioProject..NashvilleHousing b
 	 AND a.[UniqueID ] != b.[UniqueID ]
 WHERE a.PropertyAddress is null
 
--- 3. 
+-- 3. CHANGES
 -- Next, we run an UPDATE statement to replace NULL values 
 -- with ISNULL(a.PropertyAddress, b.PropertyAddress)
 
@@ -184,7 +184,7 @@ FROM PortfolioProject..NashvilleHousing
 GROUP BY SoldAsVacant
 ORDER BY 2;
 
--- 2. UNCOMMITTED CHANGES
+-- 2. ATTEMPTED CHANGES
 SELECT SoldAsVacant, 
        CASE
            WHEN SoldAsVacant = 'Y' THEN 'Yes'
@@ -193,7 +193,7 @@ SELECT SoldAsVacant,
 		   END
 FROM PortfolioProject..NashvilleHousing;
 
--- 3. COMMITTED CHANGES
+-- 3. CHANGES
 
 UPDATE NashvilleHousing
 SET SoldAsVacant = CASE
@@ -263,7 +263,7 @@ ORDER BY PropertyAddress;
 -- From these results, we know how many duplicates there are in the dataset
 -- and which rows are duplicates. 
 
--- 3.
+-- 3. CHANGES
 -- To delete the duplicates, we need to replace the second SELECT with a DELETE.
 
 WITH RowNumCTE AS (
